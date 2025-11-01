@@ -1,18 +1,40 @@
-# fchk.py
-try:
-    import importlib
-    import sys, os
+#!/usr/bin/env python3
+"""
+Dev Mueid Mursalin Rifat
+"""
 
-    # Get current directory and module name (without .py)
-    module_name = os.path.splitext(os.path.basename(__file__))[0]
+import sys
+import os
+from pathlib import Path
 
-    # Import compiled module (.so)
-    compiled_module = importlib.import_module(module_name)
+def main():
+    # Add current directory to Python path
+    current_dir = Path(__file__).parent
+    sys.path.insert(0, str(current_dir))
+    
+    try:
+        # Import the compiled module
+        import fchk
+        
+        # If the module has a main function, call it
+        if hasattr(fchk, 'main'):
+            fchk.main()
+        elif hasattr(fchk, 'run'):
+            fchk.run()
+        else:
+            # Try to call it as a function if it's callable
+            if callable(fchk):
+                fchk()
+            else:
+                print("fchk module loaded successfully!")
+                print("Available functions:", [x for x in dir(fchk) if not x.startswith('_')])
+                
+    except ImportError as e:
+        print(f"Error importing fchk module: {e}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error running fchk: {e}")
+        sys.exit(1)
 
-    # If the compiled module has a "main" function, run it
-    if hasattr(compiled_module, "fchk"):
-        compiled_module.main()
-    else:
-        print(f"{module_name}.cpython-312.so loaded successfully.")
-except Exception as e:
-    print(f"Error loading compiled module: {e}")
+if __name__ == "__main__":
+    main()
