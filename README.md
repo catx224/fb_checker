@@ -1,6 +1,8 @@
 # fchk.py
 Facebook ID Checker 🔍
+
 Developer: Mueid Mursalin Rifat
+
 Version: 2.0
 
 A Python tool for checking Facebook account credentials with multi-threading support.
@@ -25,6 +27,7 @@ pip install requests
 1. Prepare accounts file (uid|password format):
 
 ```
+UID|PASSWORD
 123456789|password123
 987654321|mypass456
 ```
@@ -32,7 +35,8 @@ pip install requests
 1. Run the tool:
 
 ```bash
-cd fchk
+git clone https://github.com/catx224/fb_checker.git
+cd fb_checker
 python fchk.py
 ```
 
@@ -44,5 +48,5 @@ python fchk.py
 
 ⚠️ Disclaimer
 
-For educational purposes only. Use only on accounts you own.
+For educational purposes only.
 
